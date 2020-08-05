@@ -1,14 +1,13 @@
 import React from "react";
 
-import GlobalStyles from "./Styles/GlobalStyles";
+import Context from "./Context";
 import Routes from "./Routes";
 
 function App() {
   return (
-    <>
-      <GlobalStyles />
+    <Context>
       <Routes />
-    </>
+    </Context>
   );
 }
 

@@ -89,8 +89,8 @@ export const ItemFooter = styled.footer`
   }
 `;
 
-export const Button = styled.button`
-  cursor: pointer;
+export const AnchorButton = styled.a`
+  text-decoration: none;
   width: 20rem;
   height: 5.6rem;
   background-color: var(--color-secondary);

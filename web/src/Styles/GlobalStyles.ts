@@ -1,25 +1,27 @@
 import styled, { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
+import { themeTypes } from "../Helper/theme_Related";
+
+const GlobalStyles = createGlobalStyle<{ theme: themeTypes }>`
   :root {
-    --color-background: #F0F0F7;
+    --color-background: ${({ theme }) => theme.color_background};
     --color-primary-lighter: #9871F5;
     --color-primary-light: #916BEA;
     --color-primary: #8257E5;
     --color-primary-dark: #774DD6;
     --color-primary-darker: #6842C2;
-    --color-secondary: #04D361;
+    --color-secondary: ${({ theme }) => theme.color_secondary};
     --color-secondary-dark: #04BF58;
     --color-title-in-primary: #FFFFFF;
     --color-text-in-primary: #D4C2FF;
-    --color-text-title: #32264D;
+    --color-text-title: ${({ theme }) => theme.color_text_title};
     --color-text-complement: #9C98A6;
-    --color-text-base: #6A6180;
-    --color-line-in-white: #E6E6F0;
-    --color-input-background: #F8F8FC;
+    --color-text-base: ${({ theme }) => theme.color_text_base};
+    --color-line-in-white: ${({ theme }) => theme.color_line_in_white};
+    --color-input-background: ${({ theme }) => theme.color_input_background};
     --color-button-text: #FFFFFF;
-    --color-box-base: #FFFFFF;
-    --color-box-footer: #FAFAFC;
+    --color-box-base: ${({ theme }) => theme.color_box_base};
+    --color-box-footer: ${({ theme }) => theme.color_box_footer};
 
     font-size: 60%;
     
@@ -32,6 +34,9 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    transition: all 300ms ease;
+    transition-property: background-color, color;
   }
 
 
@@ -51,6 +56,8 @@ export default createGlobalStyle`
 
   body,
   input,
+  select,
+  option,
   button,
   textarea {
     font: 500 1.6rem Poppins;
@@ -62,3 +69,5 @@ export const Container = styled.div`
   width: 90vw;
   max-width: 700px;
 `;
+
+export default GlobalStyles;

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-import logoImg from "../../Assets/Images/logo.svg";
-import landingImg from "../../Assets/Images/landing.svg";
+import api from "../../Services/api";
 
 import studyIcon from "../../Assets/Images/icons/study.svg";
 import giveClassesIcon from "../../Assets/Images/icons/give-classes.svg";
 import purpleHeartIcon from "../../Assets/Images/icons/purple-heart.svg";
+
+import logoImg from "../../Assets/Images/logo.svg";
+import landingImg from "../../Assets/Images/landing.svg";
 
 import {
   Container,
@@ -18,6 +20,18 @@ import {
 } from "./styles";
 
 const Landing: React.FC = () => {
+  const [totalConnections, setTotalConnections] = useState(0);
+
+  useEffect(() => {
+    api
+      .get("/connections")
+      .then((response) => {
+        const { total } = response.data;
+        setTotalConnections(total);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <Container>
       <GlobalContainer>
@@ -44,7 +58,7 @@ const Landing: React.FC = () => {
         </ButtonsContainer>
 
         <span className="total">
-          Total de 200 conexões já realizadas
+          Total de {totalConnections} conexões já realizadas
           <img src={purpleHeartIcon} alt="Coração roxo" />
         </span>
       </GlobalContainer>
