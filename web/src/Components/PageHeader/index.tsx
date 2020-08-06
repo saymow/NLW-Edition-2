@@ -23,7 +23,7 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ title, description, children }) => {
-  const { toggleTheme } = useGlobalState();
+  const { toggleTheme, actualTheme } = useGlobalState();
 
   return (
     <Container>
@@ -32,7 +32,12 @@ const PageHeader: React.FC<Props> = ({ title, description, children }) => {
           <img src={backicon} alt="voltar" />
         </Link>
         <SwitchElement>
-          <SwitchInput type="checkbox" id="checkbox" onClick={toggleTheme} />
+          <SwitchInput
+            type="checkbox"
+            id="checkbox"
+            checked={actualTheme === "dark" ? true : false}
+            onChange={toggleTheme}
+          />
           <label htmlFor="checkbox">
             <MoonIcon />
             <SunIcon />
