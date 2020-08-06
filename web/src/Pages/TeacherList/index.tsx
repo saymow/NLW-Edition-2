@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 
 import api from "../../Services/api";
 
@@ -7,15 +7,25 @@ import TeacherItem from "../../Components/TeacherItem";
 import Input from "../../Components/Input";
 import Select from "../../Components/Select";
 
-import { Container, Form, Content } from "./styles";
+import { Container, OptionsContainer, DaySpan, Form, Content } from "./styles";
 
 const TeacherList: React.FC = () => {
   const [teacher, setTeachers] = useState([]);
+  const [selectedWeekDays, setSelectedWeekDays] = useState([
+    { value: "Segunda-feira", selected: false },
+    { value: "Terça-feira", selected: false },
+    { value: "Quarta-feira", selected: false },
+    { value: "Quinta-feira", selected: false },
+    { value: "Sexta-feira", selected: false },
+    { value: "Sábado", selected: false },
+    { value: "Domingo", selected: false },
+  ]);
   const [queryState, setQueryState] = useState({
     subject: "",
-    week_day: "",
     time: "",
   });
+
+  console.log(teacher);
 
   function handleOnChange(
     event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -27,20 +37,52 @@ const TeacherList: React.FC = () => {
     });
   }
 
-  function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    console.log(queryState);
+  function handleSelectedDay(index: number) {
+    const newSelectedWeek = [...selectedWeekDays];
+
+    newSelectedWeek[index].selected = !selectedWeekDays[index].selected;
+
+    setSelectedWeekDays(newSelectedWeek);
+  }
+
+  useEffect(() => {
+    const selectedDays = selectedWeekDays.reduce((accumulator, day, index) => {
+      if (day.selected) return [...accumulator, index + 1];
+      return accumulator;
+    }, [] as number[]);
+
+    if (!queryState.subject || !queryState.time || selectedDays.length === 0) {
+      if (teacher.length !== 0) setTeachers([]);
+      return;
+    }
+
+    console.log("Api was called");
+
     api
       .get("classes", {
-        params: queryState,
+        params: {
+          ...queryState,
+          week_day: selectedDays.join(", "),
+        },
       })
       .then((response) => setTeachers(response.data));
-  }
+  }, [selectedWeekDays, queryState, teacher.length]);
 
   return (
     <Container>
       <PageHeader title="Estes são os proffys disponíveis.">
-        <Form className="form" onSubmit={handleSubmit}>
+        <OptionsContainer>
+          {selectedWeekDays.map((weekDay, index) => (
+            <DaySpan
+              key={weekDay.value}
+              selected={weekDay.selected}
+              onClick={() => handleSelectedDay(index)}
+            >
+              {weekDay.value}
+            </DaySpan>
+          ))}
+        </OptionsContainer>
+        <Form className="form">
           <Select
             name="subject"
             label="Matéria"
@@ -77,7 +119,7 @@ const TeacherList: React.FC = () => {
               },
             ]}
           />
-          <Select
+          {/* <Select
             name="week_day"
             label="Dia da semana"
             value={queryState.week_day}
@@ -112,7 +154,7 @@ const TeacherList: React.FC = () => {
                 label: "Sábado",
               },
             ]}
-          />
+          /> */}
           <Input
             type="time"
             label="Hora"
@@ -120,7 +162,6 @@ const TeacherList: React.FC = () => {
             value={queryState.time}
             onChange={handleOnChange}
           />
-          <button>Submit</button>
         </Form>
       </PageHeader>
 

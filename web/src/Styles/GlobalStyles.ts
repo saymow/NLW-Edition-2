@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle<{ theme: themeTypes }>`
     padding: 0;
     box-sizing: border-box;
 
-    transition: all 300ms ease;
+    transition: all 200ms ease;
     transition-property: background-color, color;
   }
 

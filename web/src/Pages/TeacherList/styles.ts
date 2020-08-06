@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 import { Container as GlobalContainer } from "../../Styles/GlobalStyles";
 
+interface DaySpanProps {
+  selected: Boolean;
+}
+
 export const Container = styled(GlobalContainer)`
   width: 100vw;
   height: 100vh;
@@ -10,12 +14,53 @@ export const Container = styled(GlobalContainer)`
     max-width: 100%;
 
     .form {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 1.6rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
       position: absolute;
       bottom: -2.8rem;
+
+      div {
+        width: 30%;
+      }
     }
+  }
+`;
+
+export const OptionsContainer = styled.div`
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+`;
+
+export const DaySpan = styled.span<DaySpanProps>`
+  cursor: pointer;
+  width: 18%;
+  height: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font: 500 1.2rem Archivo;
+  color: var(--color-title-in-primary);
+  text-align: center;
+
+  padding: 0 0.5rem;
+  margin: 0.5rem;
+
+  border-radius: 0.5rem;
+  background: var(--color-primary-darker);
+
+  opacity: ${(props) => (props.selected ? "1" : ".4")};
+
+  transition: opacity 200ms ease;
+
+  @media (min-width: 700px) {
+    font-size: 1.6rem;
   }
 `;
 
