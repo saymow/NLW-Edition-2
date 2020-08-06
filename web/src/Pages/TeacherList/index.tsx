@@ -1,6 +1,7 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, useEffect, useRef } from "react";
 
 import api from "../../Services/api";
+import { useClassesRequestWithDebouncer } from "../../Hooks/TeacherList_related";
 
 import PageHeader from "../../Components/PageHeader";
 import TeacherItem from "../../Components/TeacherItem";
@@ -10,7 +11,6 @@ import Select from "../../Components/Select";
 import { Container, OptionsContainer, DaySpan, Form, Content } from "./styles";
 
 const TeacherList: React.FC = () => {
-  const [teacher, setTeachers] = useState([]);
   const [selectedWeekDays, setSelectedWeekDays] = useState([
     { value: "Segunda-feira", selected: false },
     { value: "Terça-feira", selected: false },
@@ -25,7 +25,12 @@ const TeacherList: React.FC = () => {
     time: "",
   });
 
-  console.log(teacher);
+  const teacher = useClassesRequestWithDebouncer({
+    api,
+    queryState,
+    selectedWeekDays,
+    delay: 500,
+  });
 
   function handleOnChange(
     event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -44,29 +49,6 @@ const TeacherList: React.FC = () => {
 
     setSelectedWeekDays(newSelectedWeek);
   }
-
-  useEffect(() => {
-    const selectedDays = selectedWeekDays.reduce((accumulator, day, index) => {
-      if (day.selected) return [...accumulator, index + 1];
-      return accumulator;
-    }, [] as number[]);
-
-    if (!queryState.subject || !queryState.time || selectedDays.length === 0) {
-      if (teacher.length !== 0) setTeachers([]);
-      return;
-    }
-
-    console.log("Api was called");
-
-    api
-      .get("classes", {
-        params: {
-          ...queryState,
-          week_day: selectedDays.join(", "),
-        },
-      })
-      .then((response) => setTeachers(response.data));
-  }, [selectedWeekDays, queryState, teacher.length]);
 
   return (
     <Container>
@@ -119,42 +101,6 @@ const TeacherList: React.FC = () => {
               },
             ]}
           />
-          {/* <Select
-            name="week_day"
-            label="Dia da semana"
-            value={queryState.week_day}
-            onChange={handleOnChange}
-            options={[
-              {
-                value: "0",
-                label: "Domingo",
-              },
-              {
-                value: "1",
-                label: "Segunda-feira",
-              },
-              {
-                value: "2",
-                label: "Terça-feira",
-              },
-              {
-                value: "3",
-                label: "Quarta-feira",
-              },
-              {
-                value: "4",
-                label: "Quinta-feira",
-              },
-              {
-                value: "5",
-                label: "Sexta-feira",
-              },
-              {
-                value: "6",
-                label: "Sábado",
-              },
-            ]}
-          /> */}
           <Input
             type="time"
             label="Hora"
