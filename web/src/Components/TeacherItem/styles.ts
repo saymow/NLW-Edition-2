@@ -48,6 +48,7 @@ export const ItemHeader = styled.header`
   align-items: center;
 
   img {
+    object-fit: cover;
     width: 8rem;
     height: 8rem;
     border-radius: 50%;
@@ -65,7 +66,7 @@ export const ItemHeader = styled.header`
 
     span {
       font-size: 1.6rem;
-      margin-top: 0.4rem;
+      margin-top: 0.8rem;
     }
   }
 `;

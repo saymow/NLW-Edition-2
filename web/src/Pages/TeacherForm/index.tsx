@@ -21,7 +21,6 @@ import api from "../../Services/api";
 
 const TeacherForm: React.FC = () => {
   const history = useHistory();
-
   const [formData, setFormData] = useState({
     name: "",
     avatar: "",
@@ -30,7 +29,6 @@ const TeacherForm: React.FC = () => {
     subject: "",
     cost: "",
   });
-
   const [scheduleItems, setScheduleItems] = useState([
     {
       week_day: 0,
@@ -38,6 +36,22 @@ const TeacherForm: React.FC = () => {
       to: "",
     },
   ]);
+
+  const subjects = [
+    "Artes",
+    "Matemática",
+    "Biologia",
+    "Física",
+    "Espanhol",
+    "Geografia",
+    "Gramática",
+    "História",
+    "Inglês",
+    "Literatura",
+    "Português",
+    "Química",
+    "Redação",
+  ];
 
   function addNewScheduleItem() {
     setScheduleItems([
@@ -64,14 +78,10 @@ const TeacherForm: React.FC = () => {
   }
 
   function setScheduleItemValue(index: number, field: string, value: string) {
-    console.log(index, field, value);
-
     const updatedScheduleItems = scheduleItems.map((scheduleItem, index2) => {
       if (index === index2) return { ...scheduleItem, [field]: value };
       return scheduleItem;
     });
-
-    console.log(updatedScheduleItems);
 
     setScheduleItems(updatedScheduleItems);
   }
@@ -132,36 +142,10 @@ const TeacherForm: React.FC = () => {
             label="Matéria"
             value={formData.subject}
             onChange={handleOnChange}
-            options={[
-              {
-                value: "Artes",
-                label: "Artes",
-              },
-              {
-                value: "Biologia",
-                label: "Biologia",
-              },
-              {
-                value: "Química",
-                label: "Química",
-              },
-              {
-                value: "Matemática",
-                label: "Matemática",
-              },
-              {
-                value: "Educação Física",
-                label: "Educação Física",
-              },
-              {
-                value: "Física",
-                label: "Física",
-              },
-              {
-                value: "Gramática",
-                label: "Gramática",
-              },
-            ]}
+            options={subjects.map((subject) => ({
+              value: subject,
+              label: subject,
+            }))}
           />
           <Input
             name="cost"

@@ -24,13 +24,27 @@ const TeacherList: React.FC = () => {
     subject: "",
     time: "",
   });
-
   const teacher = useClassesRequestWithDebouncer({
     api,
     queryState,
     selectedWeekDays,
     delay: 500,
   });
+  const subjects = [
+    "Artes",
+    "Matemática",
+    "Biologia",
+    "Física",
+    "Espanhol",
+    "Geografia",
+    "Gramática",
+    "História",
+    "Inglês",
+    "Literatura",
+    "Português",
+    "Química",
+    "Redação",
+  ];
 
   function handleOnChange(
     event: ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -70,36 +84,10 @@ const TeacherList: React.FC = () => {
             label="Matéria"
             value={queryState.subject}
             onChange={handleOnChange}
-            options={[
-              {
-                value: "Artes",
-                label: "Artes",
-              },
-              {
-                value: "Biologia",
-                label: "Biologia",
-              },
-              {
-                value: "Química",
-                label: "Química",
-              },
-              {
-                value: "Matemática",
-                label: "Matemática",
-              },
-              {
-                value: "Educação Física",
-                label: "Educação Física",
-              },
-              {
-                value: "Física",
-                label: "Física",
-              },
-              {
-                value: "Gramática",
-                label: "Gramática",
-              },
-            ]}
+            options={subjects.map((subject) => ({
+              value: subject,
+              label: subject,
+            }))}
           />
           <Input
             type="time"
