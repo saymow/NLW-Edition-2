@@ -74,7 +74,7 @@ const Login: React.FC = () => {
                   <span></span>
                 </label>
               </div>
-              <Link to="/to-do">Esqueci minha senha</Link>
+              <Link to="/recover_pass">Esqueci minha senha</Link>
             </Options>
             <Button className={isFormValid ? "validForm" : ""}>Entrar</Button>
           </Form>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Form as FormikForm } from "formik";
+
+import { AuthButton } from "../../Styles/utils";
 import {
   HeartFill,
   Eye as BsEye,
@@ -102,23 +104,7 @@ export const Options = styled.section`
   }
 `;
 
-export const Button = styled.button`
-  cursor: pointer;
-  width: 100%;
-
-  color: var(--color-text-complement);
-  background: #dcdce6;
-  border-radius: 0.5rem;
-
-  padding: 1.2rem;
-  border: 0;
-  outline: 0;
-
-  &.validForm {
-    color: var(--color-background);
-    background: var(--color-secondary);
-  }
-`;
+export const Button = styled(AuthButton)``;
 
 export const MoreOptions = styled.div`
   /* position: absolute;
