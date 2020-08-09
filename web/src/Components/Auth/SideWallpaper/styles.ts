@@ -34,12 +34,11 @@ export const Container = styled.div`
 export const BackDrop = styled.div`
   position: absolute;
   background: url(${background});
-  background-size: contain;
+  background-size: 100% 100%;
   left: 10%;
   top: 10%;
   width: 80%;
   height: 80%;
 
   transform: rotate(90deg);
-  filter: brightness(70%);
 `;

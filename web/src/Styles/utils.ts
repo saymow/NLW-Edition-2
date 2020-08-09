@@ -1,6 +1,18 @@
 import styled from "styled-components";
 import { Form as FormikForm } from "formik";
 
+const AuthContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+  /* height: 560px;
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 1440px;
+
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); */
+`;
+
 const AuthButton = styled.button`
   cursor: pointer;
   width: 100%;
@@ -39,4 +51,4 @@ const AuthForm = styled(FormikForm)`
   }
 `;
 
-export { AuthButton, AuthForm };
+export { AuthButton, AuthForm, AuthContainer };

@@ -1,18 +1,15 @@
 import styled from "styled-components";
 
-import { AuthButton, AuthForm } from "../../Styles/utils";
+import { AuthButton, AuthForm, AuthContainer } from "../../Styles/utils";
 import { BsEye, BsEyeSlash, HeartFill } from "../../Styles/icons";
 
-export const Container = styled.div`
+export const Container = styled(AuthContainer)`
   /* height: 560px;
   margin: 3rem auto;
   width: 90%;
   max-width: 1440px;
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); */
-  width: 100vw;
-  height: 100vh;
-
   display: grid;
   grid-template-columns: 55% 45%;
 `;

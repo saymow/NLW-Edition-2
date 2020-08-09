@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
+
+import navigateBackIcon from "../../Assets/Images/icons/back.svg";
 
 import SideWallpaper from "../../Components/Auth/SideWallpaper";
 import SideTemplate from "../../Components/Auth/SideTemplate";
@@ -12,20 +14,33 @@ import {
   RegisterContainer,
   Form,
   Button,
-  ArrowBack,
   Eye,
   EyeSlash,
+  NavigateBackImage,
 } from "./styles";
+import SuccessBackground from "../../Components/Auth/SuccessBackground";
 
 const Register: React.FC = () => {
-  const [isFormValid, setIsFormValid] = useState(false);
+  const history = useHistory();
 
-  return (
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormSubmited, setIsFormSubmited] = useState(false);
+
+  return isFormSubmited ? (
+    <SuccessBackground
+      title="Cadastro concluído"
+      description={[
+        "Agora você faz parte da plataforma da Proffy.",
+        "Tenha uma ótima experiência.",
+      ]}
+      action={() => history.push("/")}
+    />
+  ) : (
     <Container>
       <SideTemplate>
         <RegisterContainer>
           <Link to="/">
-            <ArrowBack />
+            <NavigateBackImage src={navigateBackIcon} alt="navigte back" />
           </Link>
           <h2>Cadastro</h2>
           <p>Preencha os dados abaixo para começar.</p>
@@ -61,7 +76,11 @@ const Register: React.FC = () => {
                 };
               }
             }}
-            onSubmit={(values) => alert(values)}
+            onSubmit={(values) => {
+              // TO-DO
+
+              setIsFormSubmited(true);
+            }}
           >
             <Form>
               <Input type="text" name="name" placeholder="Nome" />

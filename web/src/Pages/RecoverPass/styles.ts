@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
-import { AuthButton } from "../../Styles/utils";
-import { ArrowNarrowLeft } from "../../Styles/icons";
+import { AuthButton, AuthContainer } from "../../Styles/utils";
 
-export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-
+export const Container = styled(AuthContainer)`
   display: grid;
   grid-template-columns: 45% 55%;
 `;
@@ -72,12 +68,7 @@ export const Input = styled.input`
 
 export const Button = styled(AuthButton)``;
 
-export const ArrowBack = styled(ArrowNarrowLeft)`
+export const NavigateBackImage = styled.img`
   position: absolute;
   top: -4rem;
-  margin-bottom: auto;
-  color: var(--color-primary);
-
-  width: 6rem;
-  height: 6rem;
 `;

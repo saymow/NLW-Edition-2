@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
+import navigateBackIcon from "../../Assets/Images/icons/back.svg";
 
 import SideTemplate from "../../Components/Auth/SideTemplate";
 import SideWallpaper from "../../Components/Auth/SideWallpaper";
@@ -10,12 +12,16 @@ import {
   Form,
   Input,
   Button,
-  ArrowBack,
+  NavigateBackImage,
 } from "./styles";
+import SuccessBackground from "../../Components/Auth/SuccessBackground";
 
 const RecoverPass: React.FC = () => {
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormSubmited, setIsFormSubmited] = useState(false);
 
   async function handleOnChangeInputEmail(
     event: ChangeEvent<HTMLInputElement>
@@ -37,16 +43,26 @@ const RecoverPass: React.FC = () => {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    alert({
-      email,
-    });
+
+    // TO-DO
+
+    setIsFormSubmited(true);
   }
 
-  return (
+  return isFormSubmited ? (
+    <SuccessBackground
+      title="Redefinição enviada!"
+      description={[
+        "Boa, agora é só checar o e-mail que foi enviado para você",
+        "redefinir sua senha e aproveitar os estudos.",
+      ]}
+      action={() => history.push("/")}
+    />
+  ) : (
     <Container>
       <SideTemplate>
         <Link to="/">
-          <ArrowBack />
+          <NavigateBackImage src={navigateBackIcon} alt="navigte back" />
         </Link>
         <RecoverPassContainer>
           <h2>Eita, esqueceu sua senha?</h2>

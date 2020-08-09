@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
-import { AuthButton, AuthForm } from "../../Styles/utils";
-import { ArrowNarrowLeft, BsEye, BsEyeSlash } from "../../Styles/icons";
+import { AuthButton, AuthForm, AuthContainer } from "../../Styles/utils";
+import { BsEye, BsEyeSlash } from "../../Styles/icons";
 
-export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-
+export const Container = styled(AuthContainer)`
   display: grid;
   grid-template-columns: 45% 55%;
 `;
@@ -30,12 +27,7 @@ export const Eye = styled(BsEye)``;
 
 export const EyeSlash = styled(BsEyeSlash)``;
 
-export const ArrowBack = styled(ArrowNarrowLeft)`
+export const NavigateBackImage = styled.img`
   position: absolute;
   top: -4rem;
-  margin-bottom: auto;
-  color: var(--color-primary);
-
-  width: 6rem;
-  height: 6rem;
 `;
