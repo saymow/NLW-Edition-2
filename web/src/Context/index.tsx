@@ -15,11 +15,21 @@ const Context = createContext(
   {} as {
     toggleTheme(): void;
     actualTheme: string;
+    loggedIn: Boolean;
+    user?: UserProps;
+    signIn(arg0: UserProps): void;
   }
 );
 
+interface UserProps {
+  name: string;
+  email: string;
+  img_url: string;
+}
+
 const AppContext: React.FC = ({ children }) => {
   const [theme, setTheme] = useState("light");
+  const [user, setUser] = useState<UserProps | undefined>(undefined);
 
   const toggleTheme = useCallback(() => {
     setTheme((prevValue) => {
@@ -30,6 +40,8 @@ const AppContext: React.FC = ({ children }) => {
     });
   }, []);
 
+  const signIn = (data: UserProps) => setUser(data);
+
   useEffect(() => {
     const storagedTheme = localStorage.getItem("@Theme:");
 
@@ -39,8 +51,11 @@ const AppContext: React.FC = ({ children }) => {
   return (
     <Context.Provider
       value={{
+        loggedIn: Boolean(user),
         toggleTheme,
         actualTheme: theme,
+        user,
+        signIn,
       }}
     >
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>

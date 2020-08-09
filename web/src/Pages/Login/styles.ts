@@ -12,6 +12,17 @@ export const Container = styled(AuthContainer)`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); */
   display: grid;
   grid-template-columns: 55% 45%;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 45% 55%;
+  }
+
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+export const LoginContainer = styled.div`
 `;
 
 export const Form = styled(AuthForm)``;

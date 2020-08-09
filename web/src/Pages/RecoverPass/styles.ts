@@ -5,10 +5,18 @@ import { AuthButton, AuthContainer } from "../../Styles/utils";
 export const Container = styled(AuthContainer)`
   display: grid;
   grid-template-columns: 45% 55%;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 55% 45%;
+  }
+
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr;
+  }
 `;
-export const RecoverPassContainer = styled.section`
+
+export const RecoverPassContainer = styled.div`
   position: relative;
-  margin-bottom: 40%;
 
   h2 {
     max-width: 70%;
@@ -55,6 +63,7 @@ export const Input = styled.input`
   padding: 1.4rem 1rem 0.6rem;
   border: 0;
   width: 100%;
+  background: var(--color-box-footer);
   outline: 0;
 
   &::placeholder {
@@ -70,5 +79,5 @@ export const Button = styled(AuthButton)``;
 
 export const NavigateBackImage = styled.img`
   position: absolute;
-  top: -4rem;
+  top: 1rem;
 `;

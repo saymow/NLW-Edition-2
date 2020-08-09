@@ -8,6 +8,7 @@ import SideTemplate from "../../Components/Auth/SideTemplate";
 
 import {
   Container,
+  LoginContainer,
   Form,
   Eye,
   EyeSlash,
@@ -25,70 +26,72 @@ const Login: React.FC = () => {
     <Container>
       <SideWallpaper />
       <SideTemplate>
-        <h2>Fazer Login</h2>
-        <Formik
-          initialValues={{
-            email: "",
-            password: "",
-          }}
-          validate={async (values) => {
-            try {
-              const schema = Yup.object().shape({
-                email: Yup.string().required().max(320).email(),
-                password: Yup.string()
-                  .required()
-                  .min(8)
-                  .max(32)
-                  .matches(/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/g),
-              });
+        <LoginContainer>
+          <h2>Fazer Login</h2>
+          <Formik
+            initialValues={{
+              email: "",
+              password: "",
+            }}
+            validate={async (values) => {
+              try {
+                const schema = Yup.object().shape({
+                  email: Yup.string().required().max(320).email(),
+                  password: Yup.string()
+                    .required()
+                    .min(8)
+                    .max(32)
+                    .matches(/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/g),
+                });
 
-              await schema.validate(values);
+                await schema.validate(values);
 
-              setIsFormValid(true);
+                setIsFormValid(true);
 
-              return {};
-            } catch (error) {
-              setIsFormValid(false);
-              return {
-                email:
-                  "since i won't use this, arbitrary message, i just wanna control the form validy",
-                password: "",
-              };
-            }
-          }}
-          onSubmit={(fields) => alert(fields)}
-        >
-          <Form>
-            <Input name="email" type="email" placeholder="E-mail" />
-            <Input
-              name="password"
-              type="password"
-              placeholder="Senha"
-              passwordIcons={[Eye as any, EyeSlash as any]}
-            />
-            <Options>
-              <div>
-                <label>
-                  Lembrar-me
-                  <input type="checkbox" id="keep-conected" />
-                  <span></span>
-                </label>
-              </div>
-              <Link to="/recover_pass">Esqueci minha senha</Link>
-            </Options>
-            <Button className={isFormValid ? "validForm" : ""}>Entrar</Button>
-          </Form>
-        </Formik>
+                return {};
+              } catch (error) {
+                setIsFormValid(false);
+                return {
+                  email:
+                    "since i won't use this, arbitrary message, i just wanna control the form validy",
+                  password: "",
+                };
+              }
+            }}
+            onSubmit={(fields) => alert(fields)}
+          >
+            <Form>
+              <Input name="email" type="email" placeholder="E-mail" />
+              <Input
+                name="password"
+                type="password"
+                placeholder="Senha"
+                passwordIcons={[Eye as any, EyeSlash as any]}
+              />
+              <Options>
+                <div>
+                  <label>
+                    Lembrar-me
+                    <input type="checkbox" id="keep-conected" />
+                    <span></span>
+                  </label>
+                </div>
+                <Link to="/recover_pass">Esqueci minha senha</Link>
+              </Options>
+              <Button className={isFormValid ? "validForm" : ""}>Entrar</Button>
+            </Form>
+          </Formik>
 
-        <MoreOptions>
-          <div>
-            <div>Não tem conta?</div>
-            <Link to="/register">Cadastre-se</Link>
-          </div>
-          <div>
-            É de graça <PurpleHeartIcon />
-          </div>
-        </MoreOptions>
+          <MoreOptions>
+            <div>
+              <div>Não tem conta?</div>
+              <Link to="/register">Cadastre-se</Link>
+            </div>
+            <div>
+              É de graça <PurpleHeartIcon />
+            </div>
+          </MoreOptions>
+        </LoginContainer>
       </SideTemplate>
     </Container>
   );

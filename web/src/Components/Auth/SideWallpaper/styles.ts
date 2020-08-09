@@ -29,6 +29,10 @@ export const Container = styled.div`
       font: 400 2.5rem Archivo;
     }
   }
+
+  @media (max-width: 660px) {
+    display: none;
+  }
 `;
 
 export const BackDrop = styled.div`

@@ -43,6 +43,7 @@ export const Input = styled.input`
   border: 0;
   width: 100%;
   outline: 0;
+  background: var(--color-box-footer);
 
   &:focus {
     border-left: 2px solid var(--color-primary);

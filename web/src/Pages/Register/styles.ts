@@ -6,11 +6,17 @@ import { BsEye, BsEyeSlash } from "../../Styles/icons";
 export const Container = styled(AuthContainer)`
   display: grid;
   grid-template-columns: 45% 55%;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 55% 45%;
+  }
+
+  @media (max-width: 660px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-export const RegisterContainer = styled.section`
-  margin-bottom: 10%;
-
+export const RegisterContainer = styled.div`
   p {
     max-width: 55%;
     margin-bottom: 3rem;
@@ -29,5 +35,5 @@ export const EyeSlash = styled(BsEyeSlash)``;
 
 export const NavigateBackImage = styled.img`
   position: absolute;
-  top: -4rem;
+  top: 1rem;
 `;

@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { Form as FormikForm } from "formik";
 
 const AuthContainer = styled.div`
+  /* margin: auto;
+  width: 90%;
+  max-width: 1440px;
+  height: 100%;
+  max-height: 640px; */
+
   width: 100vw;
   height: 100vh;
 
