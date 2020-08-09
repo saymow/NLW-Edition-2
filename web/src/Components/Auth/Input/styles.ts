@@ -6,6 +6,27 @@ export const Container = styled.div`
   background: var(--color-box-footer);
   padding: 0.7rem 0;
 
+  span {
+    color: var(--color-text-complement);
+    line-height: 1.6rem;
+    font-size: 1.6rem;
+    top: calc(50% - 0.8rem);
+    position: absolute;
+    left: 1rem;
+
+    transition: all 200ms ease;
+
+    &.repositioned {
+      font-size: 1.2rem;
+      top: 0.5rem;
+    }
+  }
+
+  input:focus + span {
+    font-size: 1.2rem;
+    top: 0.5rem;
+  }
+
   svg {
     cursor: pointer;
     width: 2.5rem;
@@ -18,14 +39,10 @@ export const Container = styled.div`
 
 export const Input = styled.input`
   font-size: 1.6rem;
-  padding: 1rem;
+  padding: 1.4rem 1rem 0.6rem;
   border: 0;
   width: 100%;
   outline: 0;
-
-  &::placeholder {
-    color: var(--color-text-complement);
-  }
 
   &:focus {
     border-left: 2px solid var(--color-primary);

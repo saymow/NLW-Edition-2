@@ -83,7 +83,7 @@ const Login: React.FC = () => {
         <MoreOptions>
           <div>
             <div>Não tem conta?</div>
-            <Link to="to-do">Cadastre-se</Link>
+            <Link to="/register">Cadastre-se</Link>
           </div>
           <div>
             É de graça <PurpleHeartIcon />

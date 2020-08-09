@@ -58,8 +58,8 @@ const RecoverPass: React.FC = () => {
                 onChange={handleOnChangeInputEmail}
                 id="email"
                 type="email"
-                placeholder="E-mail"
               />
+              <span className={email !== "" ? "repositioned" : ""}>E-mail</span>
             </div>
             <Button
               disabled={!isFormValid}

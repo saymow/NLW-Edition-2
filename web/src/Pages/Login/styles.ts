@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import { Form as FormikForm } from "formik";
 
-import { AuthButton } from "../../Styles/utils";
-import {
-  HeartFill,
-  Eye as BsEye,
-  EyeSlash as BsEyeSlash,
-} from "@styled-icons/bootstrap";
+import { AuthButton, AuthForm } from "../../Styles/utils";
+import { BsEye, BsEyeSlash, HeartFill } from "../../Styles/icons";
 
 export const Container = styled.div`
   /* height: 560px;
@@ -22,25 +17,7 @@ export const Container = styled.div`
   grid-template-columns: 55% 45%;
 `;
 
-export const Form = styled(FormikForm)`
-  > div {
-    border: 1px solid var(--color-line-in-white);
-  }
-
-  > div:first-child {
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-  }
-
-  > div:not(:first-child) {
-    border-top: none;
-  }
-
-  > div:last-of-type {
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-  }
-`;
+export const Form = styled(AuthForm)``;
 
 export const Options = styled.section`
   margin: 1.5em 0 3rem;

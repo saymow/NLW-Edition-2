@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ArrowNarrowLeft } from "@styled-icons/heroicons-outline";
 
 import { AuthButton } from "../../Styles/utils";
+import { ArrowNarrowLeft } from "../../Styles/icons";
 
 export const Container = styled.div`
   width: 100vw;
@@ -23,18 +23,40 @@ export const Form = styled.form`
   margin-top: 2.5rem;
 
   div {
+    position: relative;
     border: 1px solid var(--color-line-in-white);
     overflow: hidden;
     background: var(--color-box-footer);
     padding: 0.7rem 0;
     border-radius: 0.5rem;
     margin-bottom: 2rem;
+
+    span {
+      color: var(--color-text-complement);
+      line-height: 1.6rem;
+      font-size: 1.6rem;
+      top: calc(50% - 0.8rem);
+      position: absolute;
+      left: 1rem;
+
+      transition: all 200ms ease;
+
+      &.repositioned {
+        font-size: 1.2rem;
+        top: 0.5rem;
+      }
+    }
+
+    input:focus + span {
+      font-size: 1.2rem;
+      top: 0.5rem;
+    }
   }
 `;
 
 export const Input = styled.input`
   font-size: 1.6rem;
-  padding: 1rem;
+  padding: 1.4rem 1rem 0.6rem;
   border: 0;
   width: 100%;
   outline: 0;

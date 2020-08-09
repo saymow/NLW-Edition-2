@@ -8,7 +8,7 @@ interface Props {
   name: string;
   type: string;
   mask?: any[];
-  placeholder?: string;
+  placeholder: string;
   // maxLength?: number;
   // max?: number;
   // pattern?: string;
@@ -20,7 +20,11 @@ interface Props {
 
 // styled-icons/types/StyledIcon is getting error;
 
-const FormInput: React.FC<Props> = ({ passwordIcons, ...props }) => {
+const FormInput: React.FC<Props> = ({
+  passwordIcons,
+  placeholder,
+  ...props
+}) => {
   const [inputType, setInputType] = useState(props.type);
   const [field, meta] = useField(props);
 
@@ -38,6 +42,9 @@ const FormInput: React.FC<Props> = ({ passwordIcons, ...props }) => {
   return (
     <Container className={meta.touched ? "focused" : ""}>
       <Input {...field} {...props} type={inputType} />
+      <span className={field.value !== "" ? "repositioned" : ""}>
+        {placeholder}
+      </span>
       {Icons && Icons.showText && inputType === "text" ? (
         <Icons.showText onClick={handleIconClick} />
       ) : (
