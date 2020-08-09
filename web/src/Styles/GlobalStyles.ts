@@ -63,6 +63,11 @@ const GlobalStyles = createGlobalStyle<{ theme: themeTypes }>`
     font: 500 1.6rem Poppins;
     color: var(--color-text-base);
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 `;
 
 export const Container = styled.div`
