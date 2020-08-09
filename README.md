@@ -28,10 +28,17 @@
 - [Expo](https://expo.io/)
 
 <br>
+<br>
 
+<h1 align="center"> Web </h1>
 <p align="center">
   <img src="https://github.com/saymow/NLW-Edition-2/blob/master/.github/Web.gif" width="100%"><img>
-  <br> 
+</p>
+
+<br>
+
+<h1 align="center">Mobile</h1>
+<p align="center">
   <img src="https://github.com/saymow/NLW-Edition-2/blob/master/.github/Mobile.gif" width="220px" ><img>
 </p>
 
