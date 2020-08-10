@@ -23,7 +23,11 @@ export default {
     });
 
     res.status(201).send({
-      token: generateToken({ id }, "secret", "7d"),
+      token: generateToken(
+        { id },
+        process.env.JWT_SESSION_TOKEN_SECRET as string,
+        "7d"
+      ),
       userData: {
         name,
         email,
@@ -51,7 +55,11 @@ export default {
       throw new AppError("Invalid password", 401);
 
     return res.send({
-      token: generateToken({ id }, "secret", "7d"),
+      token: generateToken(
+        { id },
+        process.env.JWT_SESSION_TOKEN_SECRET as string,
+        "7d"
+      ),
       userData: {
         name,
         lastname,
@@ -68,7 +76,11 @@ export default {
 
     if (!userExists) throw new AppError("Email is not registered", 409);
 
-    const token = generateToken({ email }, "emailSecret", "1h");
+    const token = generateToken(
+      { email },
+      process.env.JWT_PASSWORD_RECOVER_SECRET as string,
+      "1h"
+    );
 
     const serializedLink = "http://localhost:3333/retrieve_pass/" + token;
 

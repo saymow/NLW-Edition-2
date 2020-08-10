@@ -25,4 +25,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(3333);
+app.listen(process.env.PORT || 9000, () =>
+  console.log("Server is opened at port", process.env.PORT || 9000)
+);
