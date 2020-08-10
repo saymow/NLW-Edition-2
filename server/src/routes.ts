@@ -1,5 +1,7 @@
 import express from "express";
 
+import Middleware from "./Middleware";
+
 import ClassesController from "./Controllers/ClassesController";
 import ConnectionsController from "./Controllers/ConnectionsController";
 import UsersController from "./Controllers/UsersController";
@@ -11,10 +13,10 @@ routes.post("/signin", UsersController.signIn);
 routes.post("/send_recover_pass", UsersController.sendRecoverPass);
 routes.post("/change_pass", UsersController.changePassword);
 
-routes.post("/classes", ClassesController.store);
-routes.get("/classes", ClassesController.index);
+routes.post("/classes", Middleware.auth, ClassesController.store);
+routes.get("/classes", Middleware.auth, ClassesController.index);
 
-routes.post("/connections", ConnectionsController.store);
-routes.get("/connections", ConnectionsController.index);
+routes.post("/connections", Middleware.auth, ConnectionsController.store);
+routes.get("/connections", Middleware.auth, ConnectionsController.index);
 
 export default routes;
