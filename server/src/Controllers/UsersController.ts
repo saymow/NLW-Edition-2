@@ -1,8 +1,14 @@
 import { Response, Request } from "express";
 import knex from "../database/connection";
 import { hash, compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
+
 import AppError from "../Errors/AppError";
+import MailService from "../Services/mailer";
+
+interface TokenPayload {
+  email: string;
+}
 
 export default {
   async store(req: Request, res: Response) {
@@ -69,12 +75,14 @@ export default {
     });
   },
 
-  async recoverPass(req: Request, res: Response) {
+  async sendRecoverPass(req: Request, res: Response) {
     const { email } = req.body;
 
     const [userExists] = await knex("users").where({ email });
 
     if (!userExists) throw new AppError("Email is not registered", 409);
+
+    const { name, lastname } = userExists;
 
     const token = generateToken(
       { email },
@@ -84,7 +92,45 @@ export default {
 
     const serializedLink = "http://localhost:3333/retrieve_pass/" + token;
 
-    res.send({ serializedLink });
+    await MailService.sendEmail({
+      to: {
+        name: `${name} ${lastname}`,
+        address: email as string,
+      },
+      subject: "Proffy - Recuperação de senha",
+      body:
+        "<p> Olá, proffy. Fiquei sabendo que perdeu sua senha, segue abaixo um link para recuperá-la. </p>" +
+        `<p><a href="${serializedLink}">Clique aqui!</a></p>`,
+    });
+
+    res.send();
+  },
+
+  async changePassword(req: Request, res: Response) {
+    const { token, password } = req.body;
+
+    try {
+      const decoded = verify(
+        token as string,
+        process.env.JWT_PASSWORD_RECOVER_SECRET as string
+      );
+
+      const { email } = decoded as TokenPayload;
+
+      const hashedPass = await hash(password, 8);
+
+      await knex("users")
+        .where({
+          email,
+        })
+        .update({
+          password: hashedPass,
+        });
+
+      res.send();
+    } catch (err) {
+      throw new AppError("Invalid token", 401);
+    }
   },
 };
 
