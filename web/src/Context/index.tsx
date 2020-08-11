@@ -19,6 +19,7 @@ const Context = createContext(
     loggedIn: Boolean;
     user?: UserProps;
     signIn(arg0: SignData): Promise<SignInError | void>;
+    logOut(): void;
   }
 );
 
@@ -67,6 +68,8 @@ const AppContext: React.FC = ({ children }) => {
       .catch((error) => error.response.data);
   };
 
+  const logOut = () => setUser(undefined);
+
   useEffect(() => {
     const storagedTheme = localStorage.getItem("@Theme:");
 
@@ -76,11 +79,12 @@ const AppContext: React.FC = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        loggedIn: Boolean(user),
+        loggedIn: true,
         toggleTheme,
         actualTheme: theme,
         user,
         signIn,
+        logOut,
       }}
     >
       <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>

@@ -12,27 +12,34 @@ export const Container = styled.div`
   align-items: center;
 
   color: var(--color-text-in-primary);
-  background: var(--color-primary);
+  /* background: var(--color-primary); */
+  background: linear-gradient(
+    var(--color-primary) 70%,
+    var(--color-background) 0%
+  );
 `;
 
 export const GlobalContainer = styled(GlobalContainerStyles)`
   @media (min-width: 1100px) {
-    max-width: 1100px;
+    max-width: 1260px;
+    width: 90%;
 
+    height: min(85%, 660px);
     display: grid;
-    grid-template-rows: 350px 1fr;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 75% 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "logo hero hero"
-      "buttons buttons total";
+      "logo hero "
+      "total buttons";
 
     .logo {
       grid-area: logo;
       align-self: center;
       text-align: left;
-      margin: 0;
+      margin-bottom: 10rem;
 
       h2 {
+        max-width: 60%;
         font-size: 3.6rem;
       }
 
@@ -43,7 +50,7 @@ export const GlobalContainer = styled(GlobalContainerStyles)`
 
     .heroImg {
       grid-area: hero;
-      justify-self: end;
+      justify-self: self-end;
     }
 
     .buttonsContainer {
@@ -57,19 +64,7 @@ export const GlobalContainer = styled(GlobalContainerStyles)`
 
     .total {
       grid-area: total;
-      justify-self: end;
-    }
-  }
-
-  span {
-    font-size: 1.4rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      margin-left: 0.8rem;
+      /* justify-self: center; */
     }
   }
 `;
@@ -77,7 +72,7 @@ export const GlobalContainer = styled(GlobalContainerStyles)`
 export const LogoContainer = styled.div`
   height: 10rem;
   text-align: center;
-  margin-bottom: 3.2rem;
+  margin-bottom: 3.6rem;
 
   h2 {
     font-weight: 500;
@@ -135,5 +130,41 @@ export const GiveClassesLink = styled(Link)`
 
   &:hover {
     background: var(--color-secondary-dark);
+  }
+`;
+
+export const Message = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0 2rem;
+
+  h5 {
+    color: var(--color-text-base);
+    font-size: 2rem;
+    font-weight: 500;
+
+    span {
+      display: block;
+      font-weight: bold;
+    }
+  }
+
+  > span {
+    font-size: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    color: var(--color-text-complement);
+
+    span {
+      display: block;
+
+      img {
+        margin-left: 0.8rem;
+      }
+    }
   }
 `;

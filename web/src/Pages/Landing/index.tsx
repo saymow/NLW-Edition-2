@@ -9,6 +9,8 @@ import purpleHeartIcon from "../../Assets/Images/icons/purple-heart.svg";
 import logoImg from "../../Assets/Images/logo.svg";
 import landingImg from "../../Assets/Images/landing.svg";
 
+import Header from "./Header";
+
 import {
   Container,
   GlobalContainer,
@@ -17,6 +19,7 @@ import {
   ButtonsContainer,
   StudyLink,
   GiveClassesLink,
+  Message,
 } from "./styles";
 
 const Landing: React.FC = () => {
@@ -34,6 +37,7 @@ const Landing: React.FC = () => {
 
   return (
     <Container>
+      <Header />
       <GlobalContainer>
         <LogoContainer className="logo">
           <img src={logoImg} alt="Proffy Logo" />
@@ -56,11 +60,19 @@ const Landing: React.FC = () => {
             Dar aulas
           </GiveClassesLink>
         </ButtonsContainer>
-
-        <span className="total">
-          Total de {totalConnections} conexões já realizadas
-          <img src={purpleHeartIcon} alt="Coração roxo" />
-        </span>
+        <Message className="total">
+          <h5>
+            Seja bem vindo.
+            <span>O que deseja fazer?</span>
+          </h5>
+          <span>
+            Total de {totalConnections} conexões
+            <span>
+              já realizadas
+              <img src={purpleHeartIcon} alt="Coração roxo" />
+            </span>
+          </span>
+        </Message>
       </GlobalContainer>
     </Container>
   );

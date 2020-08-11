@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Landing from "../Pages/Landing";
-import TeacherList from "../Pages/TeacherList";
 import TeacherForm from "../Pages/TeacherForm";
+import TeacherList from "../Pages/TeacherList";
 
 const Routes: React.FC = () => {
   return (
