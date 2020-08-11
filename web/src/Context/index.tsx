@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { ThemeProvider } from "styled-components";
 
+import api from "../Services/api";
 import GlobalStyles from "../Styles/GlobalStyles";
 
 import { darkTheme, lightTheme } from "../Helper/theme_Related";
@@ -17,14 +18,25 @@ const Context = createContext(
     actualTheme: string;
     loggedIn: Boolean;
     user?: UserProps;
-    signIn(arg0: UserProps): void;
+    signIn(arg0: SignData): Promise<SignInError | void>;
   }
 );
 
 interface UserProps {
   name: string;
   email: string;
-  img_url: string;
+  avatar?: string;
+  whatsapp?: string;
+  bio?: string;
+}
+
+interface SignData {
+  email: string;
+  password: string;
+}
+
+interface SignInError {
+  message: string;
 }
 
 const AppContext: React.FC = ({ children }) => {
@@ -40,7 +52,20 @@ const AppContext: React.FC = ({ children }) => {
     });
   }, []);
 
-  const signIn = (data: UserProps) => setUser(data);
+  function storeToken(token: string) {
+    localStorage.setItem("@Auth:", `Bearer ${token}`);
+  }
+
+  const signIn = async (data: SignData) => {
+    return await api
+      .post("/signin", data)
+      .then((response) => {
+        const { token, userData } = response.data;
+        storeToken(token);
+        setUser(userData);
+      })
+      .catch((error) => error.response.data);
+  };
 
   useEffect(() => {
     const storagedTheme = localStorage.getItem("@Theme:");

@@ -6,6 +6,7 @@ import routes from "./routes";
 import AppError from "./Errors/AppError";
 
 const app = express();
+const port = process.env.PORT || 3333;
 
 app.use(cors());
 app.use(express.json());
@@ -25,6 +26,4 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(process.env.PORT || 9000, () =>
-  console.log("Server is opened at port", process.env.PORT || 9000)
-);
+app.listen(port, () => console.log("Server is opened at port", port));

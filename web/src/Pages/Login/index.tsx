@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import { useGlobalState } from "../../Context/index";
+
 import Input from "../../Components/Auth/Input";
 import SideWallpaper from "../../Components/Auth/SideWallpaper";
 import SideTemplate from "../../Components/Auth/SideTemplate";
@@ -20,6 +22,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
+  const { signIn } = useGlobalState();
   const [isFormValid, setIsFormValid] = useState(false);
 
   return (
@@ -58,7 +61,10 @@ const Login: React.FC = () => {
                 };
               }
             }}
-            onSubmit={(fields) => alert(fields)}
+            onSubmit={async (values) => {
+              const thereIsError = await signIn(values);
+              if (thereIsError) alert(JSON.stringify(thereIsError));
+            }}
           >
             <Form>
               <Input name="email" type="email" placeholder="E-mail" />
@@ -78,7 +84,13 @@ const Login: React.FC = () => {
                 </div>
                 <Link to="/recover_pass">Esqueci minha senha</Link>
               </Options>
-              <Button className={isFormValid ? "validForm" : ""}>Entrar</Button>
+              <Button
+                disabled={!isFormValid}
+                type="submit"
+                className={isFormValid ? "validForm" : ""}
+              >
+                Entrar
+              </Button>
             </Form>
           </Formik>
 

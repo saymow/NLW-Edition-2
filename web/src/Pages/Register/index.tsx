@@ -19,6 +19,7 @@ import {
   NavigateBackImage,
 } from "./styles";
 import SuccessBackground from "../../Components/Auth/SuccessBackground";
+import api from "../../Services/api";
 
 const Register: React.FC = () => {
   const history = useHistory();
@@ -76,10 +77,11 @@ const Register: React.FC = () => {
                 };
               }
             }}
-            onSubmit={(values) => {
-              // TO-DO
+            onSubmit={async (values) => {
+              const response = await api.post("/signup", values);
 
-              setIsFormSubmited(true);
+              if (response.status === 201) setIsFormSubmited(true);
+              else alert("Error");
             }}
           >
             <Form>
@@ -92,7 +94,11 @@ const Register: React.FC = () => {
                 placeholder="Senha"
                 passwordIcons={[Eye, EyeSlash]}
               />
-              <Button className={isFormValid ? "validForm" : ""}>
+              <Button
+                type="submit"
+                disabled={!isFormValid}
+                className={isFormValid ? "validForm" : ""}
+              >
                 Concluir cadastro
               </Button>
             </Form>

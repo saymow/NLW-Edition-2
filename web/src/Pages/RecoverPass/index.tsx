@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 
 import navigateBackIcon from "../../Assets/Images/icons/back.svg";
 
+import api from "../../Services/api";
+
 import SideTemplate from "../../Components/Auth/SideTemplate";
 import SideWallpaper from "../../Components/Auth/SideWallpaper";
 import {
@@ -41,12 +43,16 @@ const RecoverPass: React.FC = () => {
     }
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    // TO-DO
-
-    setIsFormSubmited(true);
+    api
+      .post("/send_recover_pass", { email })
+      .then((response) => {
+        console.log(response.data);
+        setIsFormSubmited(true);
+      })
+      .catch((error) => alert(JSON.stringify(error.response.data)));
   }
 
   return isFormSubmited ? (
@@ -78,6 +84,7 @@ const RecoverPass: React.FC = () => {
               <span className={email !== "" ? "repositioned" : ""}>E-mail</span>
             </div>
             <Button
+              type="submit"
               disabled={!isFormValid}
               className={isFormValid ? "validForm" : ""}
             >

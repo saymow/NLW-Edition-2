@@ -51,6 +51,7 @@ export default {
     const {
       id,
       name,
+      bio,
       lastname,
       avatar,
       whatsapp,
@@ -69,6 +70,7 @@ export default {
       userData: {
         name,
         lastname,
+        bio,
         avatar,
         whatsapp,
       },
@@ -90,7 +92,7 @@ export default {
       "1h"
     );
 
-    const serializedLink = "http://localhost:3333/retrieve_pass/" + token;
+    const serializedLink = "http://localhost:3000/set-new-pass/" + token;
 
     await MailService.sendEmail({
       to: {

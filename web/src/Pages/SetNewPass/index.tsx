@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
 
+import api from "../../Services/api";
+
 import SideTemplate from "../../Components/Auth/SideTemplate";
 import SideWallpaper from "../../Components/Auth/SideWallpaper";
+import SuccessBackground from "../../Components/Auth/SuccessBackground";
 
 import {
   Container,
@@ -17,11 +20,22 @@ import {
 import Input from "../../Components/Auth/Input";
 
 const SetNewPass: React.FC = () => {
+  const history = useHistory();
   const { token } = useParams();
 
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormSubmited, setIsFormSubmited] = useState(false);
 
-  return (
+  return isFormSubmited ? (
+    <SuccessBackground
+      title="Sua nova senha está configurada!"
+      description={[
+        "Sua nova senha já pode ser usada.",
+        "Agora é só ir para página de login efetua-lo. :D",
+      ]}
+      action={() => history.push("/")}
+    />
+  ) : (
     <Container>
       <SideTemplate>
         <SetPassContainer>
@@ -59,10 +73,16 @@ const SetNewPass: React.FC = () => {
                 };
               }
             }}
-            onSubmit={(values) => {
-              alert(JSON.stringify({ ...values, token }));
-
-              // todo
+            onSubmit={async (values) => {
+              api
+                .post("change_pass", {
+                  token,
+                  password: values.password,
+                })
+                .then((response) => {
+                  setIsFormSubmited(true);
+                })
+                .catch((error) => alert(JSON.stringify(error.response.data)));
             }}
           >
             <Form>
@@ -77,7 +97,13 @@ const SetNewPass: React.FC = () => {
                 name="confirmation"
                 placeholder="Confirmação"
               />
-              <Button className={isFormValid ? "validForm" : ""}>Enviar</Button>
+              <Button
+                type="submit"
+                disabled={!isFormValid}
+                className={isFormValid ? "validForm" : ""}
+              >
+                Enviar
+              </Button>
             </Form>
           </Formik>
         </SetPassContainer>

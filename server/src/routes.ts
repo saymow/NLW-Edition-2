@@ -16,7 +16,7 @@ routes.post("/change_pass", UsersController.changePassword);
 routes.post("/classes", Middleware.auth, ClassesController.store);
 routes.get("/classes", Middleware.auth, ClassesController.index);
 
+routes.get("/connections", ConnectionsController.index);
 routes.post("/connections", Middleware.auth, ConnectionsController.store);
-routes.get("/connections", Middleware.auth, ConnectionsController.index);
 
 export default routes;
