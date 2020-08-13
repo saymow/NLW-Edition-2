@@ -46,8 +46,8 @@
 
 ## :airplane: Próximos passos
 
-- #### :x: Autenticação de usuários
-- #### :x: Recuperação de senhas
+- #### :white_check_mark: Autenticação de usuários
+- #### :white_check_mark: Recuperação de senhas
 - #### :x: Perfil do proffy
 - #### :x: Splash Screen no React Native com Expo
 - #### :x: Paginação na listagem de proffys
