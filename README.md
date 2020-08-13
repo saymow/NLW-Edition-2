@@ -48,14 +48,16 @@
 
 - #### :white_check_mark: Autenticação de usuários
 - #### :white_check_mark: Recuperação de senhas
+- #### :white_check_mark: Logout da aplicação
 - #### :x: Perfil do proffy
 - #### :x: Splash Screen no React Native com Expo
 - #### :x: Paginação na listagem de proffys
 - #### :x: Exibindo horários disponíveis dos proffys
 - #### :x: Salvando seus proffys favoritos (no banco de dados.)
-- #### :x: Logout da aplicação
 - #### :x: Deploy da aplicação
 
+
+<br/>
 
 ## :clipboard: How to use?
 
